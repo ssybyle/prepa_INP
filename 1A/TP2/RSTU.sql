@@ -1,0 +1,127 @@
+.mode box
+.echo on
+
+CREATE TABLE R (
+    A InTEGER,
+    B INTEGER,
+    C INTEGER,
+    PRIMARY KEY (B, C)
+);
+
+INSERT INTO R (A, B, C)
+VALUES
+    (1, 3, 5),
+    (7, 9, 8),
+    (8, 1, 2),
+    (1, 3, 3),
+    (9, 7, 2);
+
+CREATE TABLE S (
+    C INTEGER PRIMARY KEY,
+    D INTEGER
+);
+
+INSERT INTO S(C, D)
+VALUES
+    (8, 1),
+    (2, 3);
+
+CREATE TABLE T (
+    D INTEGER,
+    E INTEGER,
+    F INTEGER
+);
+
+INSERT INTO T(D, E, F)
+VALUES
+    (1, 2, 3),
+    (0, 4, 7),
+    (3, 0, 9);
+
+CREATE TABLE U (
+    G INTEGER,
+    H INTEGER
+);
+
+INSERT INTO U (G, H) VALUES
+    (3, 2),
+    (0, 7);
+
+
+SELECT * FROM R;
+SELECT * FROM S;
+SELECT * FROM T;
+SELECT * FROM U;
+
+SELECT A, B FROM R;
+
+SELECT * FROM R WHERE B < 4;
+SELECT * FROM R WHERE B < C;
+
+SELECT * FROM R, S;
+SELECT * FROM R JOIN S;
+SELECT * FROM R JOIN S ON R.C = S.C;
+SELECT * FROM R NATURAL JOIN S;
+
+SELECT R.* FROM R JOIN S ON R.C = S.C;
+
+SELECT * FROM R NATURAL JOIN S WHERE B < D;
+
+SELECT * FROM R NATURAL JOIN S NATURAL JOIN T;
+
+SELECT * FROM R NATURAL JOIN T WHERE C <= D;
+
+SELECT * FROM S, U;
+
+SELECT * FROM S, T;
+
+-- fonctions d'agrÃ©gation
+SELECT  MIN(A) AS Min,
+	MAX(A) AS Max,
+	AVG(A) AS "Moyenne A",
+	SUM(A) AS Somme,
+	COUNT(A) AS "Nb de valeurs",
+	AVG(B) AS "Moyenne B"
+FROM R;
+
+SELECT  MIN(A)   Min,
+	MAX(A)   Max,
+	AVG(A)   Moyenne,
+	SUM(A)   Somme,
+	COUNT(A) "Nb de valeurs"
+FROM (SELECT DISTINCT A FROM R);
+
+SELECT * FROM R ORDER BY C;
+SELECT * FROM R ORDER BY C DESC;
+
+-- opÃ©rateurs sur les ensembles
+SELECT A FROM R
+INTERSECT
+SELECT B FROM R;
+
+SELECT A FROM R
+UNION
+SELECT B FROM R;
+
+
+SELECT A FROM R
+EXCEPT
+SELECT C FROM R;
+
+
+SELECT C FROM R WHERE A IN (SELECT F FROM T);
+
+SELECT * FROM R WHERE EXISTS (SELECT * FROM T WHERE D = R.A or E = R.A);
+
+SELECT * FROM R WHERE NOT EXISTS (SELECT * FROM T WHERE D = R.A or E = R.A);
+
+
+
+SELECT * FROM  R, T LIMIT 4;
+
+
+
+SELECT A, SUM(B), MIN(C), MAX(C), AVG(C)
+FROM R
+GROUP BY A
+ORDER BY AVG(C) DESC;
