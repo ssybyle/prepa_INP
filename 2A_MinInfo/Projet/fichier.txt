@@ -1,0 +1,23 @@
+D 60 Permis de construire
+Fo 7 Fondations
+GE1 3 Passage des gaines et  évacuations
+DRC 7 Dalle rez de chaussée
+MP 14 Murs porteurs
+DP 7 Dalles plafond
+GE2 3 Passage gaines et  ́evacuation
+T 14 Toiture
+Fe 7 Fenêtres
+PE 3 Portes extérieures
+IE 3 Installation électrique et évacuation
+C 7 Chape
+C1 7 Carrelage du sol
+P 7 Parquets
+CM 10 Cloisons et menuiserie intérieure
+FC 7 Finition des cloisons
+IC 7 Implantation de la cuisine
+IW 3 Implantation des wc
+IS 7 Implantation des salles de bain
+PP 7 Peinture des plafonds
+PM 7 Peinture des murs
+S 3 Serrurerie
+F 1 Réception de la maison
